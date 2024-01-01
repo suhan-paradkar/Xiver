@@ -1,6 +1,8 @@
-package com.wizard.xiver
+package com.wizard.xiver.utils
 
-object Categories {
+import com.wizard.xiver.CategoryItem
+
+object CategoryUtils {
     @JvmField
     val CATEGORIES = arrayOf(
         CategoryItem(

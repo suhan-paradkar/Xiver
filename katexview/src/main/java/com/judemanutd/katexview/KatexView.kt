@@ -2,28 +2,26 @@ package com.judemanutd.katexview
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.view.MotionEvent
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import com.x5.template.Chunk
 import com.x5.template.Theme
 import com.x5.template.providers.AndroidTemplates
 
-private val TAG_FORMULA: String = "formula"
-private val TAG_TEXT_COLOR: String = "textColor"
+
+private const val TAG_FORMULA: String = "formula"
+private const val TAG_TEXT_COLOR: String = "textColor"
 
 private var mText: String? = null
 //TODO: pick theme set text color
 private var mTextColor: Int = android.R.color.holo_purple
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
-fun KatexView(text: String, textColor: Int) {
-    val scope = rememberCoroutineScope()
-    val context = LocalContext.current
+fun KatexView(text: String, textColor: Int, backgroundColor: Int) {
     AndroidView(factory = {
 
         WebView(it).apply {
@@ -34,11 +32,13 @@ fun KatexView(text: String, textColor: Int) {
             settings.builtInZoomControls = false
             settings.setSupportZoom(false)
             settings.useWideViewPort = false
-            setBackgroundColor(android.graphics.Color.TRANSPARENT)
-            setText(text, context)
+            setBackgroundColor(backgroundColor)
+            setText(text, it)
             setTextColor(textColor, it)
-            loadDataWithBaseURL(null, loadData(context), "text/html", "utf-8", "about:blank")
-
+            loadDataWithBaseURL(null, loadData(it), "text/html", "utf-8", "about:blank")
+            isVerticalScrollBarEnabled = false
+            isHorizontalScrollBarEnabled = false
+            getSettings().layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
             webViewClient = WebViewClient()
         }
     })

@@ -1,7 +1,11 @@
-package com.wizard.xiver
+package com.wizard.xiver.utils
 
 import android.content.Context
 import android.util.Log
+import com.wizard.xiver.Entry
+import com.wizard.xiver.Feed
+import com.wizard.xiver.Link
+import com.wizard.xiver.ResultInt
 import kotlinx.serialization.SerializationException
 import java.io.File
 import java.io.IOException
@@ -32,44 +36,17 @@ class SavedUtils {
             val xml = file.readText()
             val feed = try {
                 if (isFileEmpty(file)) {
-                    Feed(
-                        id = "",
-                        entry = emptyList<Entry>().toMutableList(),
-                        itemsPerPage = 0,
-                        link = Link(href = "", type = "", rel = ""),
-                        startIndex = 0,
-                        title = "",
-                        totalResults = ResultInt(0),
-                        updated = ""
-                    )
+                    EmptySerialUtils.EmptyFeed
                 } else {
                     ArxivNetUtils.XmlUtil.xml().decodeFromString(Feed.serializer(), xml)
                 }
             } catch (e: SerializationException) {
                 Log.d("SavedUtils", e.toString())
-                Feed(
-                    id = "",
-                    entry = emptyList<Entry>().toMutableList(),
-                    itemsPerPage = 0,
-                    link = Link(href = "", type = "", rel = ""),
-                    startIndex = 0,
-                    title = "",
-                    totalResults = ResultInt(0),
-                    updated = ""
-                )
+                EmptySerialUtils.EmptyFeed
             } catch (e: IllegalStateException) {
                 Log.e("SavedUtils", e.toString())
                 Log.e("SavedUtils", xml)
-                Feed(
-                    id = "",
-                    entry = emptyList<Entry>().toMutableList(),
-                    itemsPerPage = 0,
-                    link = Link(href = "", type = "", rel = ""),
-                    startIndex = 0,
-                    title = "",
-                    totalResults = ResultInt(0),
-                    updated = ""
-                )
+                EmptySerialUtils.EmptyFeed
             }
             return feed
         }
@@ -77,14 +54,16 @@ class SavedUtils {
         fun savePaper(paperEntity: Entry, context: Context){
             val feed = getSavedPapers(context)
             val updatedFeed = feed.copy(entry = feed.entry + paperEntity)
-            val serializedFeed = ArxivNetUtils.XmlUtil.xml().encodeToString(Feed.serializer(), updatedFeed)
+            val serializedFeed = ArxivNetUtils.XmlUtil.xml()
+                .encodeToString(Feed.serializer(), updatedFeed)
             getFile(context).writeText(serializedFeed)
         }
 
         fun deletePaper(paperEntity: Entry, context: Context){
             val feed = getSavedPapers(context)
             val updatedFeed = feed.copy(entry = feed.entry - paperEntity)
-            val serializedFeed = ArxivNetUtils.XmlUtil.xml().encodeToString(Feed.serializer(), updatedFeed)
+            val serializedFeed = ArxivNetUtils.XmlUtil.xml()
+                .encodeToString(Feed.serializer(), updatedFeed)
             getFile(context).writeText(serializedFeed)
         }
 

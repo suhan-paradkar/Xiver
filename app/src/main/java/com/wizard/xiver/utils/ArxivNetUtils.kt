@@ -1,8 +1,9 @@
-package com.wizard.xiver
+package com.wizard.xiver.utils
 
 import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.wizard.xiver.ArxivNetUtils.XmlUtil.xml
+import com.wizard.xiver.Feed
+import com.wizard.xiver.utils.ArxivNetUtils.XmlUtil.xml
 import kotlinx.serialization.StringFormat
 import nl.adaptivity.xmlutil.serialization.XML
 import okhttp3.Interceptor

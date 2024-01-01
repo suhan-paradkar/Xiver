@@ -1,4 +1,4 @@
-package com.wizard.xiver
+package com.wizard.xiver.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.wizard.xiver.utils.CategoryUtils
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,7 +34,7 @@ fun CategoryScreen() {
         modifier = Modifier.verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center
     ) {
-        Categories.CATEGORIES.forEach { item ->
+        CategoryUtils.CATEGORIES.forEach { item ->
             if (item.subCategories.isNotEmpty()) {
                 val expanded = remember {
                     mutableStateOf(false)
@@ -44,7 +45,8 @@ fun CategoryScreen() {
                     shape = RectangleShape,
                     onClick = {
                         expanded.value = !expanded.value
-                    }
+                    },
+                    colors = CardDefaults.elevatedCardColors()
                 ){
                     Box(
                         modifier = Modifier.fillMaxWidth()
@@ -82,8 +84,7 @@ fun CategoryScreen() {
                     item.subCategories.forEach {
                         Card (
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RectangleShape,
-                            colors = CardDefaults.elevatedCardColors()
+                            shape = RectangleShape
                         ) {
                             Text(
                                 text = it!!.name,
@@ -96,7 +97,8 @@ fun CategoryScreen() {
             } else {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RectangleShape
+                    shape = RectangleShape,
+                    colors = CardDefaults.elevatedCardColors()
                 ) {
                     Text(
                         text = item.name,

@@ -1,4 +1,4 @@
-package com.wizard.xiver
+package com.wizard.xiver.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
