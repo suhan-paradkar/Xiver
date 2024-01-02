@@ -1,6 +1,5 @@
 package com.wizard.xiver.utils
 
-import SettingsUtil
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState

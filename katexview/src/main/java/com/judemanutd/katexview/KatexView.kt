@@ -2,7 +2,6 @@ package com.judemanutd.katexview
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.view.MotionEvent
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -28,6 +27,8 @@ fun KatexView(text: String, textColor: Int, backgroundColor: Int, textSize: Int)
 
         WebView(it).apply {
             settings.allowFileAccess = true
+            settings.allowFileAccessFromFileURLs = true
+            settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
             settings.allowUniversalAccessFromFileURLs = true
             settings.javaScriptEnabled = true
             settings.cacheMode = WebSettings.LOAD_NO_CACHE
@@ -42,7 +43,6 @@ fun KatexView(text: String, textColor: Int, backgroundColor: Int, textSize: Int)
             loadDataWithBaseURL(null, loadData(it), "text/html", "utf-8", "about:blank")
             isVerticalScrollBarEnabled = false
             isHorizontalScrollBarEnabled = false
-            getSettings().layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
             webViewClient = WebViewClient()
         }
     })

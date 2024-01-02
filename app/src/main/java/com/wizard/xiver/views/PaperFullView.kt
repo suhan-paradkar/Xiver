@@ -1,6 +1,5 @@
 package com.wizard.xiver.views
 
-import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -190,19 +189,12 @@ fun PaperFullViewContent(modifier: Modifier, paperEntity: Entry) {
 fun FullPaperFAB(paperEntity: Entry) {
 
     val uriHandler = LocalUriHandler.current
-
-    var pdfLink :String? = null
-    paperEntity.link.forEach{
-        if (it.type == "application/pdf") {
-            pdfLink = it.href!!
-        }
-    }
     
     FloatingActionButton(
         modifier = Modifier
             .padding(end = 20.dp, bottom = 25.dp),
         onClick = {
-            uriHandler.openUri(pdfLink?: "about:blank")
+            uriHandler.openUri(paperEntity.link.href)
         }
     ) {
         Row(

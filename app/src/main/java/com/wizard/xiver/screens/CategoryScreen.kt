@@ -18,6 +18,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -25,11 +26,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.wizard.xiver.utils.CategoryUtils
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CategoryScreen() {
+fun CategoryScreen(mainNavController: NavHostController, query: MutableState<String>) {
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center
@@ -61,7 +64,8 @@ fun CategoryScreen() {
                             )
                         }
                         Box(
-                            modifier = Modifier.align(Alignment.CenterEnd)
+                            modifier = Modifier
+                                .align(Alignment.CenterEnd)
                                 .padding(end = 10.dp)
                         ) {
                             if (!expanded.value) {
@@ -84,7 +88,11 @@ fun CategoryScreen() {
                     item.subCategories.forEach {
                         Card (
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RectangleShape
+                            shape = RectangleShape,
+                            onClick = {
+                                query.value = it!!.catKey+it.shortName
+                                mainNavController.navigate("SearchView")
+                            }
                         ) {
                             Text(
                                 text = it!!.name,
@@ -98,7 +106,11 @@ fun CategoryScreen() {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RectangleShape,
-                    colors = CardDefaults.elevatedCardColors()
+                    colors = CardDefaults.elevatedCardColors(),
+                    onClick = {
+                        query.value = item.catKey+item.shortName
+                        mainNavController.navigate("SearchView")
+                    }
                 ) {
                     Text(
                         text = item.name,
@@ -114,5 +126,8 @@ fun CategoryScreen() {
 @Preview
 @Composable
 fun CategoryScreenPreview() {
-    CategoryScreen()
+    val query = remember {
+        mutableStateOf("")
+    }
+    CategoryScreen(rememberNavController(), query)
 }

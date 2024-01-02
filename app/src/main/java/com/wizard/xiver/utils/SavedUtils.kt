@@ -4,12 +4,9 @@ import android.content.Context
 import android.util.Log
 import com.wizard.xiver.Entry
 import com.wizard.xiver.Feed
-import com.wizard.xiver.Link
-import com.wizard.xiver.ResultInt
 import kotlinx.serialization.SerializationException
 import java.io.File
 import java.io.IOException
-import java.lang.IllegalStateException
 import javax.xml.parsers.DocumentBuilderFactory
 
 class SavedUtils {

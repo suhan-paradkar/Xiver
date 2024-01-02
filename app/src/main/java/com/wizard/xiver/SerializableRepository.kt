@@ -9,7 +9,7 @@ import nl.adaptivity.xmlutil.serialization.XmlValue
 @XmlSerialName(value="feed", namespace = "http://www.w3.org/2005/Atom")
 data class Feed(
     @XmlSerialName(value = "link")
-    val link: Link,
+    val link: Link2,
     @XmlCData
     val id: String,
     @XmlCData
@@ -55,7 +55,7 @@ data class Entry (
     val doi: String,
     @XmlSerialName(value = "journal_ref", prefix = "arxiv")
     val journalRef: String?,
-    val link: List<Link>,
+    val link: Link,
     @XmlSerialName(value = "primary_category", prefix = "arxiv")
     val primaryCategory: Category?,
     val category: Category?
@@ -83,8 +83,15 @@ data class Category(
 
 @Serializable
 data class Link(
-    val href: String?,
-    val title: String?,
+    val href: String,
+    val title: String,
+    val type: String,
+    val rel: String
+)
+
+@Serializable
+data class Link2(
+    val href: String,
     val type: String,
     val rel: String
 )

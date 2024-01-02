@@ -53,7 +53,7 @@ fun MainViewContainer(mainNavController: NavHostController) {
         startDestination = "MainView"
     ) {
         composable("MainView") {
-            MainView(modifier = Modifier, paperMutableArgument = paperEntity, mainNavController = mainNavController)
+            MainView(modifier = Modifier, paperMutableArgument = paperEntity, mainNavController = mainNavController, query = query)
         }
         composable("PaperFullView"){
             PaperFullView(navController = mainNavController, paperEntity = paperEntity)

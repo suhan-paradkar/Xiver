@@ -88,23 +88,23 @@ object CategoryUtils {
         ),
         CategoryItem(
             "General Relativity and Quantum Cosmology", "gr-qc",
-            *(null ?: arrayOfNulls<CategoryItem?>(0))
+            *(null ?: arrayOfNulls(0))
         ),
         CategoryItem(
             "High Energy Physics - Experiment", "hep-ex",
-            *(null ?: arrayOfNulls<CategoryItem?>(0))
+            *(null ?: arrayOfNulls(0))
         ),
         CategoryItem(
             "High Energy Physics - Lattice", "hep-lat",
-            *(null ?: arrayOfNulls<CategoryItem?>(0))
+            *(null ?: arrayOfNulls(0))
         ),
         CategoryItem(
             "High Energy Physics - Phenomenology", "hep-ph",
-            *(null ?: arrayOfNulls<CategoryItem?>(0))
+            *(null ?: arrayOfNulls(0))
         ),
         CategoryItem(
             "High Energy Physics - Theory", "hep-th",
-            *(null ?: arrayOfNulls<CategoryItem?>(0))
+            *(null ?: arrayOfNulls(0))
         ),
         CategoryItem(
             "Mathematics", "math",
@@ -144,7 +144,7 @@ object CategoryUtils {
         ),
         CategoryItem(
             "Mathematical Physics", "math-ph",
-            *(null ?: arrayOfNulls<CategoryItem?>(0))
+            *(null ?: arrayOfNulls(0))
         ),
         CategoryItem(
             "Nonlinear Sciences", "nlin",
@@ -157,11 +157,11 @@ object CategoryUtils {
         ),
         CategoryItem(
             "Nuclear Experiment", "nucl-ex",
-            *(null ?: arrayOfNulls<CategoryItem?>(0))
+            *(null ?: arrayOfNulls(0))
         ),
         CategoryItem(
             "Nuclear Theory", "nucl-th",
-            *(null ?: arrayOfNulls<CategoryItem?>(0))
+            *(null ?: arrayOfNulls(0))
         ),
         CategoryItem(
             "Physics", "physics",
@@ -218,7 +218,7 @@ object CategoryUtils {
         ),
         CategoryItem(
             "Quantum Physics", "quant-ph",
-            *(null ?: arrayOfNulls<CategoryItem?>(0))
+            *(null ?: arrayOfNulls(0))
         ),
         CategoryItem(
             "Statistics", "stat",

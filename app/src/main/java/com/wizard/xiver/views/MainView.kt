@@ -41,11 +41,12 @@ import com.wizard.xiver.utils.NavigationUtils.Companion.popUpTo
 fun MainView(
     modifier: Modifier,
     paperMutableArgument: MutableState<Entry>,
-    mainNavController: NavHostController
+    mainNavController: NavHostController,
+    query: MutableState<String>
 ) {
     val navSelected = remember { mutableIntStateOf(1) }
     val navController = rememberNavController()
-    var title: String = "Saved"
+    var title = "Saved"
     when (navSelected.intValue) {
         0 -> {
             title = "Dashboard"
@@ -69,7 +70,7 @@ fun MainView(
             TopAppBarView(title = title, mainNavController = mainNavController)
         }
     ) {
-        MainNavHost(navHostController = navController, modifier = Modifier.padding(it), paperMutableArgument = paperMutableArgument, mainNavController = mainNavController)
+        MainNavHost(navHostController = navController, modifier = Modifier.padding(it), paperMutableArgument = paperMutableArgument, mainNavController = mainNavController, query = query)
     }
 }
 
@@ -169,7 +170,8 @@ fun MainNavHost(
     navHostController: NavHostController,
     modifier: Modifier,
     paperMutableArgument: MutableState<Entry>,
-    mainNavController: NavHostController
+    mainNavController: NavHostController,
+    query: MutableState<String>
 ) {
     NavHost(
         navController = navHostController,
@@ -180,7 +182,7 @@ fun MainNavHost(
             DashboardScreen(paperMutableArgument = paperMutableArgument, mainNavController = mainNavController)
         }
         composable("categories") {
-            CategoryScreen()
+            CategoryScreen(mainNavController = mainNavController, query = query)
         }
         composable("SavedScreen") {
             SavedScreen(paperMutableArgument = paperMutableArgument, mainNavController = mainNavController)

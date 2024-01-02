@@ -12,12 +12,12 @@ class CategoryItem(name: String, shortName: String, vararg subCategories: Catego
     var name: String
 
     init {
-        var subCategories = subCategories
+        val subCategories = subCategories
         this.name = name
         this.shortName = shortName
         this.subCategories = subCategories as Array<CategoryItem?>
     }
 
     val catKey: String
-        get() = if (name == "All") "all" else "cat"
+        get() = if (name == "All") "all:" else "cat:"
 }
