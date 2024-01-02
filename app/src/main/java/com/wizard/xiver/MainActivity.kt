@@ -19,6 +19,7 @@ import com.wizard.xiver.utils.EmptySerialUtils
 import com.wizard.xiver.utils.theme
 import com.wizard.xiver.views.MainView
 import com.wizard.xiver.views.PaperFullView
+import com.wizard.xiver.views.SearchView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +45,9 @@ fun MainViewContainer(mainNavController: NavHostController) {
     val paperEntity = remember {
         mutableStateOf(EmptySerialUtils.EmptyEntry)
     }
+    val query = remember {
+        mutableStateOf("")
+    }
     NavHost(
         navController = mainNavController,
         startDestination = "MainView"
@@ -53,6 +57,9 @@ fun MainViewContainer(mainNavController: NavHostController) {
         }
         composable("PaperFullView"){
             PaperFullView(navController = mainNavController, paperEntity = paperEntity)
+        }
+        composable("SearchView") {
+            SearchView(mainNavController = mainNavController, query = query, paperMutableArgument = paperEntity)
         }
     }
 }

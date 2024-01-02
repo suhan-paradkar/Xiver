@@ -30,6 +30,7 @@
          body {
              margin : 0;
              padding : 0;
+             font-size : {$textSize}px !important;
              color: {$textColor} !important;
              -webkit-touch-callout: none!important;
              -webkit-user-select: none!important;

@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.wizard.xiver.screens.SettingsView
 import com.wizard.xiver.ui.theme.XiverTheme
+import com.wizard.xiver.utils.findActivity
 import com.wizard.xiver.utils.theme
 import com.wizard.xiver.views.BackTopAppBar
 

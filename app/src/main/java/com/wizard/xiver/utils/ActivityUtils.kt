@@ -1,4 +1,4 @@
-package com.wizard.xiver
+package com.wizard.xiver.utils
 
 import android.content.Context
 import android.content.ContextWrapper

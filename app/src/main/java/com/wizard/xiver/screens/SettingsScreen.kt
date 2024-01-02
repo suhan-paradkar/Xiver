@@ -49,19 +49,23 @@ fun SettingsView(modifier: Modifier) {
             ) {
                 Text(
                     text = "Theme",
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(start = 10.dp, end = 100.dp)
                 )
-                DropDownSettingsItem(
-                    options = themeOptions,
-                    selectedIndex = selectedIndex.intValue,
-                    onSelect = {
-                        selectedIndex.intValue = it
-                        scope.launch {
-                            settings.saveTheme(it)
+                Box(
+                    modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
+                ) {
+                    DropDownSettingsItem(
+                        options = themeOptions,
+                        selectedIndex = selectedIndex.intValue,
+                        onSelect = {
+                            selectedIndex.intValue = it
+                            scope.launch {
+                                settings.saveTheme(it)
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
     }

@@ -15,17 +15,20 @@ import com.x5.template.providers.AndroidTemplates
 
 private const val TAG_FORMULA: String = "formula"
 private const val TAG_TEXT_COLOR: String = "textColor"
+private const val TAG_TEXT_SIZE: String = "textSize"
 
 private var mText: String? = null
 //TODO: pick theme set text color
 private var mTextColor: Int = android.R.color.holo_purple
+private var mTextSize: Int = 20
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
-fun KatexView(text: String, textColor: Int, backgroundColor: Int) {
+fun KatexView(text: String, textColor: Int, backgroundColor: Int, textSize: Int) {
     AndroidView(factory = {
 
         WebView(it).apply {
             settings.allowFileAccess = true
+            settings.allowUniversalAccessFromFileURLs = true
             settings.javaScriptEnabled = true
             settings.cacheMode = WebSettings.LOAD_NO_CACHE
             settings.displayZoomControls = false
@@ -35,6 +38,7 @@ fun KatexView(text: String, textColor: Int, backgroundColor: Int) {
             setBackgroundColor(backgroundColor)
             setText(text, it)
             setTextColor(textColor, it)
+            setTextSize(textSize, it)
             loadDataWithBaseURL(null, loadData(it), "text/html", "utf-8", "about:blank")
             isVerticalScrollBarEnabled = false
             isHorizontalScrollBarEnabled = false
@@ -54,6 +58,11 @@ fun setTextColor(color: Int, context: Context) {
     loadData(context)
 }
 
+fun setTextSize(size: Int, context: Context) {
+    mTextSize = size
+    loadData(context)
+}
+
 fun getText(): String? {
     return mText
 }
@@ -63,6 +72,7 @@ private fun loadData(context: Context): String {
         val chunk: Chunk = getChunk(context = context)
         chunk.set(TAG_FORMULA, mText)
         chunk.set(TAG_TEXT_COLOR, getHexColor(mTextColor))
+        chunk.set(TAG_TEXT_SIZE, mTextSize)
         return chunk.toString()
     }
     return ""

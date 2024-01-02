@@ -14,7 +14,7 @@ class EmptySerialUtils {
             id = "",
             entry = emptyList<Entry>().toMutableList(),
             itemsPerPage = 0,
-            link = Link(href = "", type = "", rel = ""),
+            link = Link(href = "", type = "", rel = "", title = ""),
             startIndex = 0,
             title = "",
             totalResults = ResultInt(0),
@@ -22,8 +22,8 @@ class EmptySerialUtils {
         )
 
 
-        private val EmptyLinkList = List(size = 3, init = {(Link("", it.toString(), ""))})
-        private val EmptyAuthorList = List(size = 3, init = { Author(name = Name(it.toString())) })
+        private val EmptyLinkList = List(size = 3, init = {(Link("", it.toString(), "", ""))})
+        private val EmptyAuthorList = List(size = 3, init = { Author(name = Name(it.toString()), affiliation = "") })
 
         val EmptyEntry = Entry(
             id = "",
@@ -34,6 +34,7 @@ class EmptySerialUtils {
             published = "00/00/0000",
             updated = "11/11/1111",
             comment = "A super looong comment",
+            doi = "",
             category = Category(term = ""),
             journalRef = "",
             primaryCategory = Category(term = "")

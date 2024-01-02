@@ -51,9 +51,11 @@ data class Entry (
     val author: List<Author>,
     @XmlSerialName(value = "comment", prefix = "arxiv")
     val comment: String?,
+    @XmlSerialName(value = "doi", prefix = "arxiv", namespace = "http://arxiv.org/schemas/atom")
+    val doi: String,
     @XmlSerialName(value = "journal_ref", prefix = "arxiv")
     val journalRef: String?,
-    val link: List<Link?>?,
+    val link: List<Link>,
     @XmlSerialName(value = "primary_category", prefix = "arxiv")
     val primaryCategory: Category?,
     val category: Category?
@@ -62,7 +64,9 @@ data class Entry (
 @Serializable
 data class Author(
     @XmlSerialName(value = "name")
-    val name: Name
+    val name: Name,
+    @XmlSerialName(value = "affiliation", namespace = "http://arxiv.org/schemas/atom", prefix = "arxiv")
+    val affiliation: String?
 )
 
 
@@ -79,7 +83,8 @@ data class Category(
 
 @Serializable
 data class Link(
-    val href: String,
+    val href: String?,
+    val title: String?,
     val type: String,
     val rel: String
 )

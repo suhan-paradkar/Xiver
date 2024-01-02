@@ -36,12 +36,7 @@ class ArxivNetUtils {
 
     object XmlUtil {
         fun xml(): StringFormat {
-            return XML {
-                defaultPolicy {
-                    pedantic = false
-                    ignoreUnknownChildren()
-                }
-            }
+            return XML
         }
     }
 

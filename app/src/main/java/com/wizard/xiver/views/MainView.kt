@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Category
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material.icons.outlined.Category
 import androidx.compose.material.icons.outlined.Home
@@ -65,7 +66,7 @@ fun MainView(
             )
         },
         topBar = {
-            TopAppBarView(title = title)
+            TopAppBarView(title = title, mainNavController = mainNavController)
         }
     ) {
         MainNavHost(navHostController = navController, modifier = Modifier.padding(it), paperMutableArgument = paperMutableArgument, mainNavController = mainNavController)
@@ -74,7 +75,7 @@ fun MainView(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBarView(title: String) {
+fun TopAppBarView(title: String, mainNavController: NavHostController) {
     val context = LocalContext.current
     val intent = Intent(context, SettingsActivity::class.java)
     TopAppBar(
@@ -82,6 +83,16 @@ fun TopAppBarView(title: String) {
             Text(text = title)
         },
         actions = {
+            IconButton(
+                onClick = {
+                    mainNavController.navigate("SearchView")
+                }
+            ) {
+               Icon(
+                   imageVector = Icons.Default.Search,
+                   contentDescription = "Search"
+               )
+            }
             IconButton(
                 onClick = {
                     context.startActivity(intent)
